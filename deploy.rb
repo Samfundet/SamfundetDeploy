@@ -31,7 +31,7 @@ optparse = OptionParser.new do |opts|
     end
   end
 
-  opts.on("-h", "--help", "Display this screen") do
+  opts.on_tail("-h", "--help", "Show this message") do
     puts opts
     exit
   end
