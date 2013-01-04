@@ -1,13 +1,5 @@
 #! /usr/bin/ruby1.9.3
 
-def invoke_command(command)
-  io = IO.popen "#{command} 2>&1"
-  Process.wait io.pid
-  output = io.read
-
-  raise output unless $?.success?
-end
-
 require 'rubygems'
 require 'optparse'
 require 'pathname'
@@ -60,7 +52,7 @@ shown_task_groups.keys.each do |identifier|
         execute_task(
             :description => "Restarting server..",
             :block => Proc.new {
-              invoke_command "touch tmp/restart.txt"
+              command "touch tmp/restart.txt"
             }
         )
       end

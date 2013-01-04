@@ -6,7 +6,7 @@ task_group :pull do
   description "Pull recent changes from Git remote"
 
   task "Pull recent changes from repository" do
-    invoke_command "git pull"
+    command "git pull"
   end
 end
 
@@ -14,7 +14,7 @@ task_group :install_gems do
   description "Install gems using Bundler"
 
   task "Installing new gems" do
-    invoke_command "bundle install --path vendor/"
+    command "bundle install --path vendor/"
   end
 end
 
@@ -22,7 +22,7 @@ task_group :compile_assets do
   description "Compile all assets"
 
   task "Compiling assets" do
-    invoke_command "bundle exec rake assets:precompile"
+    command "bundle exec rake assets:precompile"
   end
 end
 
@@ -30,7 +30,7 @@ task_group :migrate_database do
   description "Migrate the database"
 
   task "Migrating the database" do
-    invoke_command "bundle exec rake db:migrate RAILS_ENV=production"
+    command "bundle exec rake db:migrate RAILS_ENV=production"
   end
 end
 

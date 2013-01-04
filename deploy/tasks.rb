@@ -1,3 +1,4 @@
+require File.expand_path('tasks/task_executor', File.dirname(__FILE__))
 require File.expand_path('tasks/tasks_extractor', File.dirname(__FILE__))
 require File.expand_path('tasks/description_extractor', File.dirname(__FILE__))
 
@@ -40,7 +41,10 @@ module Tasks
 
     begin
       print "#{task[:description]}.. "
-      task[:block].call
+
+      task_executor = TaskExecutor.new
+      task_executor.instance_eval &task[:block]
+
       puts "success".green
     rescue Exception => e
       puts "error".red
