@@ -10,15 +10,16 @@ end
 
 require 'rubygems'
 require 'optparse'
+require 'pathname'
 
-require File.expand_path('deploy/tasks', File.dirname(__FILE__))
-require File.expand_path('deploy/string_colorize', File.dirname(__FILE__))
-require File.expand_path('deploy/samfundet_paths', File.dirname(__FILE__))
+require File.expand_path('deploy/tasks', File.dirname(Pathname.new(__FILE__).realpath))
+require File.expand_path('deploy/string_colorize', File.dirname(Pathname.new(__FILE__).realpath))
+require File.expand_path('deploy/samfundet_paths', File.dirname(Pathname.new(__FILE__).realpath))
 
 include Tasks
 include SamfundetPaths
 
-require File.expand_path('deploy/task_definitions', File.dirname(__FILE__))
+require File.expand_path('deploy/task_definitions', File.dirname(Pathname.new(__FILE__).realpath))
 
 options = {}
 
