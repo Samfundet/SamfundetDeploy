@@ -34,6 +34,7 @@ module Tasks
       end
     end
 
+    def env(*args) end
     def description(*args) end
   end
 end

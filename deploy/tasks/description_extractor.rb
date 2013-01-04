@@ -4,6 +4,7 @@ module Tasks
       @description ||= description
     end
 
+    def env(*args) end
     def task(*args) end
     def invoke_group(*args) end
   end

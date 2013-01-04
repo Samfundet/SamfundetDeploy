@@ -2,6 +2,12 @@ require File.expand_path('tasks/tasks_extractor', File.dirname(__FILE__))
 require File.expand_path('tasks/description_extractor', File.dirname(__FILE__))
 
 module Tasks
+  def env(env_variables)
+    env_variables.each do |key, value|
+      ENV[key.to_s] = value
+    end
+  end
+  
   def task_group(identifier, options = {}, &block)
     @task_groups ||= {}
 
