@@ -3,6 +3,8 @@ require File.expand_path('tasks/tasks_extractor', File.dirname(__FILE__))
 require File.expand_path('tasks/description_extractor', File.dirname(__FILE__))
 
 module Tasks
+  class TaskSkipped < Exception; end
+
   def env(env_variables)
     env_variables.each do |key, value|
       ENV[key.to_s] = value
@@ -40,13 +42,16 @@ module Tasks
     success = true
 
     begin
-      print "#{task[:description]}.. "
-
       task_executor = TaskExecutor.new
       task_executor.instance_eval &task[:block]
 
+      print "#{task[:description]}.. "
       puts "success".green
+    rescue TaskSkipped
+      print "#{task[:description]}.. "
+      puts "skipped".yellow
     rescue Exception => e
+      print "#{task[:description]}.. "
       puts "error".red
       puts e.message
       success = false

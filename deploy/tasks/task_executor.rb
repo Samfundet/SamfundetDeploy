@@ -7,5 +7,12 @@ module Tasks
 
       raise output unless $?.success?
     end
+
+    def ask(question)
+      print "#{question} [y/n] "
+      answer = STDIN.getc
+      STDIN.getc # Removing new line character from stack
+      answer.downcase == "y"
+    end
   end
 end

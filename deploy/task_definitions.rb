@@ -33,7 +33,11 @@ task_group :compile_assets do
   description "Compile all assets"
 
   task "Compiling assets" do
-    command "bundle exec rake assets:precompile"
+    if ask "Would you like to precompile assets?"
+      command "bundle exec rake assets:precompile"
+    else
+      raise TaskSkipped
+    end
   end
 end
 
@@ -41,7 +45,11 @@ task_group :migrate_database do
   description "Migrate the database"
 
   task "Migrating the database" do
-    command "bundle exec rake db:migrate RAILS_ENV=production"
+    if ask "Would you like run migrations?"
+      command "bundle exec rake db:migrate RAILS_ENV=production"
+    else
+      raise TaskSkipped
+    end
   end
 end
 
