@@ -4,12 +4,7 @@ env :GEM_PATH => gem_paths[:gem_path],
 
 task_group :git_status, :hidden => true do
   task "Ensuring empty git status" do
-    empty_git_status = <<-MSG.gsub(/^\s+/, '')
-      # On branch master
-      nothing to commit (working directory clean)
-    MSG
-
-    raise "Repository is not clean." unless `git status` == empty_git_status
+    raise "Repository is not clean." unless `git status -s`.blank?
   end
 end
 
